@@ -9,4 +9,3 @@ install:
 
 secript:
   - cp tests/test.py ./test.py
-  - python test.py
