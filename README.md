@@ -1,3 +1,7 @@
+
+![](https://img.shields.io/pypi/v/tcsdk.svg)
+
+
 # tcsdk
 
 Tcloud SDK for Performance DataSource Program.
