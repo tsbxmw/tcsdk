@@ -1,8 +1,8 @@
 import logging
+
 import requests
 from requests.adapters import HTTPAdapter
 from requests.structures import CaseInsensitiveDict
-
 
 import tcsdk.common.default as default
 from tcsdk.exceptions import RequestError
@@ -20,12 +20,13 @@ class Session(object):
 
     def do_request(self, req, timeout):
         try:
-            logger.debug("send request : method {}, url {}, params {}, headers {}, timeout {}".format(
+            logger.debug("send request : method {}, url {}, params {}, headers {}, timeout {}, data {}".format(
                 req.method,
                 req.url,
                 req.params,
                 req.headers,
-                timeout
+                timeout,
+                req.data
             ))
             response = Response(
                 self.session.request(req.method, req.url, json=req.data, params=req.params, headers=req.headers,
@@ -58,11 +59,12 @@ class Request(object):
         if 'User-Agent' not in self.headers:
             self.headers['User-Agent'] = default.USER_AGENT
 
-        logger.debug("init request : method {}, url {}, params {}, headers {}".format(
+        logger.debug("init request : method {}, url {}, params {}, headers {}, data {}".format(
             self.method,
             self.url,
             self.params,
-            self.headers
+            self.headers,
+            self.data
         ))
 
 
@@ -91,3 +93,36 @@ class Response(object):
 
     def __str__(self):
         return str(self.response.json())
+
+
+# api url
+
+class ApiModel(object):
+    def __init__(self, url, method, request={}, response={}, check=None):
+        self.url = url
+        self.method = method
+        self.request_kwargs = request
+        self.response_kwargs = response
+        self.check = check
+
+    def request(self, **kwargs):
+        temp = {}
+        for key in self.request_kwargs:
+            temp[key] = {}
+            data = kwargs.get(key, kwargs)
+            template = self.request_kwargs.get(key)
+            for t_key in template:
+                temp[key][t_key] = template.get(t_key)(data.get(t_key))
+        return temp
+
+    def request_without_none(self, **kwargs):
+        temp = {}
+        for key in self.request_kwargs:
+            temp[key] = {}
+            data = kwargs.get(key, kwargs)
+            template = self.request_kwargs.get(key)
+            for t_key in template:
+                if t_key not in data:
+                    continue
+                temp[key][t_key] = template.get(t_key)(data.get(t_key))
+        return temp

@@ -10,3 +10,4 @@ if __name__ == "__main__":
     label = task.create_label("test_for_sdk11")
     assert label.label_id != 0
 
+    assert label.upload(fps=100) is True

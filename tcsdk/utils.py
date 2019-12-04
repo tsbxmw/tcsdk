@@ -22,7 +22,7 @@ class Utils(object):
     @classmethod
     def version_to_headers(cls):
         return {
-            "Tcsdk_version": default.TCSDK_VERSION
+            "tcsdk_version": default.TCSDK_VERSION
         }
 
     @classmethod
