@@ -1,6 +1,5 @@
 
-![](https://img.shields.io/pypi/v/tcsdk.svg)
-
+![](https://img.shields.io/pypi/v/tcsdk.svg) [![Build Status](https://travis-ci.com/tsbxmw/tcsdk.svg?branch=master)](https://travis-ci.com/tsbxmw/tcsdk)
 
 # tcsdk
 
