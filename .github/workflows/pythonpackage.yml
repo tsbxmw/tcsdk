@@ -25,4 +25,3 @@ jobs:
     - name: Build package
       run: |
         python setup.py sdist
-        python setup.py bdist_wheel
