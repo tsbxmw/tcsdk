@@ -2,8 +2,8 @@ from tcsdk import *
 
 
 if __name__ == "__main__":
-    auth = Auth("4c8093f3", "200f759b-1b83-4d")
-    api = Api(auth=auth, endpoint="http://localhost:9030")
+    auth = Auth("bdd222a1", "9413649b-d490-4d")
+    api = Api(auth=auth, endpoint="http://122.51.145.198:9030")
     task = api.create_task("test_for_sdk_111")
     assert task.task_id != 0
 
