@@ -25,3 +25,7 @@ jobs:
     - name: Build package
       run: |
         python setup.py sdist
+    - name: Test Here
+      run: |
+        cp ./tests/test.py ./test.py
+        python test.py
