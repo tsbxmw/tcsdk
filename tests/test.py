@@ -1,3 +1,5 @@
+from random import randint
+
 from tcsdk import *
 
 
@@ -10,4 +12,19 @@ if __name__ == "__main__":
     label = task.create_label("test_for_sdk11")
     assert label.label_id != 0
 
-    assert label.upload(fps=100) is True
+    for i in range(10):
+        data = dict(
+            fps=randint(1, 60),
+            cpu_total=randint(40, 100),
+            cpu_app = randint(1,40),
+            memory_real=randint(100, 4000),
+            memory_total = randint(100,4000),
+            memory_virtual=randint(100, 1000),
+            network_send = randint(1,40000),
+            network_receive=randint(1, 40000),
+            gpu_rendor = randint(40,100),
+            gpu_tiler = randint(1,40),
+            gpu_device = randint(1,40)
+        )
+
+        assert label.upload(**data) is True
