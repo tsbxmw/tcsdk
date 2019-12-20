@@ -6,13 +6,13 @@ from tcsdk import *
 if __name__ == "__main__":
     auth = Auth("bdd222a1", "9413649b-d490-4d")
     api = Api(auth=auth, endpoint="http://122.51.145.198:9030")
-    task = api.create_task("test_for_sdk_111")
+    task = api.create_task("test_tcsdk")
     assert task.task_id != 0
 
-    label = task.create_label("test_for_sdk11")
+    label = task.create_label("test_tcsdk")
     assert label.label_id != 0
 
-    for i in range(10):
+    for i in range(100):
         data = dict(
             fps=randint(1, 60),
             cpu_total=randint(40, 100),

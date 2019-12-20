@@ -5,13 +5,13 @@ from random import randint
 if __name__ == "__main__":
     auth = Auth("c4986f87", "43c144b4-99ec-48")
     api = Api(auth=auth, endpoint="http://122.51.145.198:9030")
-    task = api.create_task("test_3")
+    task = api.create_task("test_4")
     assert task.task_id != 0
 
-    label = task.create_label("test_3")
+    label = task.create_label("test_4")
     assert label.label_id != 0
 
-    for i in range(1):
+    for i in range(100):
         data = dict(
             fps=randint(1, 60),
             cpu_total=randint(40, 100),
@@ -27,5 +27,4 @@ if __name__ == "__main__":
         )
 
         assert label.upload(**data) is True
-
     label.calculate_summary()
