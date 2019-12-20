@@ -50,3 +50,10 @@ LABEL_DATA_UPLOAD_API = ApiModel("/v1/data/upload",
                                      "battery_current": float,
                                      "battery_power": float, "battery_voltage": float, "screen_shot": str
                                  })
+
+LABEL_SUMMARY_CALCULATE = ApiModel("/v1/data/label/calsummary",
+                                   default.POST_METHOD,
+                                   dict(data={
+                                       "task_id": int, "label_id": int
+                                   }),
+                                   dict(response={"data": dict}))

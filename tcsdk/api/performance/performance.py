@@ -67,6 +67,7 @@ class Label(BaseApi):
     def update(self, label_name=""):
         res = self.request(config.LABEL_UPDATE_API.method, config.LABEL_UPDATE_API.url,
                            **config.LABEL_UPDATE_API.request(label_name=label_name))
+        return res
 
     def upload(self, **kwargs):
         check = config.LABEL_DATA_UPLOAD_API.check
@@ -83,3 +84,8 @@ class Label(BaseApi):
                                                                  label_name=self.label_name, **data)
         res = self.request(config.LABEL_DATA_UPLOAD_API.method, config.LABEL_DATA_UPLOAD_API.url,**data)
         return res.json().get("msg") == "success"
+
+    def calculate_summary(self):
+        res = self.request(config.LABEL_SUMMARY_CALCULATE.method, config.LABEL_SUMMARY_CALCULATE.url,
+                           **config.LABEL_SUMMARY_CALCULATE.request(task_id=self.task_id, label_id=self.label_id))
+        return res
