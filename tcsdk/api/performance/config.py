@@ -57,3 +57,9 @@ LABEL_SUMMARY_CALCULATE = ApiModel("/v1/data/label/calsummary",
                                        "task_id": int, "label_id": int
                                    }),
                                    dict(response={"data": dict}))
+TASK_SUMMARY_CALCULATE = ApiModel("/v1/data/task/calsummary",
+                                  default.POST_METHOD,
+                                  dict(data={
+                                      "task_id": int
+                                  }),
+                                  dict(response={"data": dict}))

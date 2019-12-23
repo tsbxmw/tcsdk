@@ -47,6 +47,11 @@ class Task(BaseApi):
         self.labels.update({name:label})
         return label
 
+    def calculate_summary(self):
+        res = self.request(config.TASK_SUMMARY_CALCULATE.method, config.TASK_SUMMARY_CALCULATE.url,
+                           **config.TASK_SUMMARY_CALCULATE.request(task_id=self.task_id))
+        return res
+
 
 class Label(BaseApi):
     def __init__(self, auth, endpoint, session, label_name="", task_id=0):
