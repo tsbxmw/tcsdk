@@ -1,3 +1,4 @@
+# coding=utf-8
 import logging
 import platform
 
@@ -50,4 +51,14 @@ GET_METHOD = "get"
 POST_METHOD = "post"
 DELETE_METHOD = "put"
 PUT_METHOD = "put"
+
+# LOGO
+TCSDK_LOGO = (
+"""
+_____  ___     
+  |   /       
+  |   \ __ loud 
+<<<<<{}.{}.{}>>>>> 
+""".format(MAIN_VERSION, SUB_VERSION, FIX_VERSION)
+)
 
