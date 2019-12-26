@@ -10,7 +10,7 @@ if __name__ == "__main__":
     label = task.create_label("test_6")
     assert label.label_id != 0
 
-    for i in range(1):
+    for i in range(100):
         data = dict(
             fps=randint(1, 60),
             cpu_total=randint(40, 100),
