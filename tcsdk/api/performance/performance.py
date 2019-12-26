@@ -52,6 +52,49 @@ class Task(BaseApi):
                            **config.TASK_SUMMARY_CALCULATE.request(task_id=self.task_id))
         return res
 
+    def app_init(self, **kwargs):
+        """
+        {
+            "name": str, "version": str, "package": str, "extention": str,
+            "remark": str
+        }
+        """
+        check = config.APP_INIT.check
+        data = {}
+        for key in kwargs:
+            try:
+                if key not in check:
+                    continue
+                data.update({key: check.get(key)(kwargs.get(key))})
+            except Exception as e:
+                logger.error(e)
+                raise e
+        data = config.APP_INIT.request_without_none(task_id=self.task_id, **data)
+        res = self.request(config.APP_INIT.method, config.APP_INIT.url, **data)
+        return res.json().get("msg") == "success"
+
+    def device_init(self, **kwargs):
+        """
+        {
+           "name": str, "cpu": str, "gpu": str, "type": str,
+           "os": str, "cpu_type": str, "cpu_arch": str, "cpu_core_number": int,
+           "cpu_frequency": str, "ram": str, "rom": str
+        }
+        """
+        check = config.DEVICE_INIT.check
+        data = {}
+        for key in kwargs:
+            try:
+                if key not in check:
+                    continue
+                data.update({key: check.get(key)(kwargs.get(key))})
+            except Exception as e:
+                logger.error(e)
+                raise e
+        data = config.DEVICE_INIT.request_without_none(task_id=self.task_id, **data)
+        res = self.request(config.DEVICE_INIT.method, config.DEVICE_INIT.url, **data)
+        return res.json().get("msg") == "success"
+
 
 class Label(BaseApi):
     def __init__(self, auth, endpoint, session, label_name="", task_id=0):
@@ -75,6 +118,17 @@ class Label(BaseApi):
         return res
 
     def upload(self, **kwargs):
+        """{
+         "task_id": int, "label_id": int, "label_name": str, "fps": float,
+         "cpu_total": float, "cpu_app": float, "memory_total": float,
+         "memory_virtual": float,
+         "memory_real": float, "network_send": float, "network_receive": float,
+         "gpu_rendor": float,
+         "gpu_tiler": float, "gpu_device": float, "c_switch": float,
+         "battery_current": float,
+         "battery_power": float, "battery_voltage": float, "screen_shot": float
+        }
+        """
         check = config.LABEL_DATA_UPLOAD_API.check
         data = {}
         for key in kwargs:

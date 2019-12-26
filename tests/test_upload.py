@@ -2,15 +2,15 @@ from tcsdk import *
 from random import randint
 
 if __name__ == "__main__":
-    auth = Auth("c4986f87", "43c144b4-99ec-48")
-    api = Api(auth=auth, endpoint="http://122.51.145.198:9030")
-    task = api.create_task("test_4")
+    auth = Auth("3e01f88a", "8078244a-c575-49")
+    api = PerformanceApi(auth=auth, endpoint="http://tcloud-api-dev.ywopt.com")
+    task = api.create_task("test_5")
     assert task.task_id != 0
 
-    label = task.create_label("test_4")
+    label = task.create_label("test_6")
     assert label.label_id != 0
 
-    for i in range(10000):
+    for i in range(1):
         data = dict(
             fps=randint(1, 60),
             cpu_total=randint(40, 100),
@@ -28,3 +28,6 @@ if __name__ == "__main__":
         assert label.upload(**data) is True
     label.calculate_summary()
     task.calculate_summary()
+    task.app_init(name="test", version="0.0.1")
+    task.device_init(name="test")
+

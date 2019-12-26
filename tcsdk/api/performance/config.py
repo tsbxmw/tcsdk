@@ -57,9 +57,36 @@ LABEL_SUMMARY_CALCULATE = ApiModel("/v1/data/label/calsummary",
                                        "task_id": int, "label_id": int
                                    }),
                                    dict(response={"data": dict}))
+
 TASK_SUMMARY_CALCULATE = ApiModel("/v1/data/task/calsummary",
                                   default.POST_METHOD,
                                   dict(data={
                                       "task_id": int
                                   }),
                                   dict(response={"data": dict}))
+
+APP_INIT = ApiModel("/v1/data/task/app",
+                    default.POST_METHOD,
+                    dict(data={
+                        "name": str, "version": str, "package": str, "extention": str,
+                        "remark": str, "task_id": int
+                    }),
+                    dict(response={"data": dict}),
+                    check={
+                        "name": str, "version": str, "package": str, "extention": str,
+                        "remark": str, "task_id": int
+                    })
+
+DEVICE_INIT = ApiModel("/v1/data/task/device",
+                       default.POST_METHOD,
+                       dict(data={
+                           "name": str, "task_id": int, "cpu": str, "gpu": str, "type": str,
+                           "os": str, "cpu_type": str, "cpu_arch": str, "cpu_core_number": int,
+                           "cpu_frequency": str, "ram": str, "rom": str
+                       }),
+                       dict(response={"data": dict}),
+                       check={
+                           "name": str, "task_id": int, "cpu": str, "gpu": str, "type": str,
+                           "os": str, "cpu_type": str, "cpu_arch": str, "cpu_core_number": int,
+                           "cpu_frequency": str, "ram": str, "rom": str
+                       })

@@ -6,7 +6,8 @@ from tcsdk.common import *
 
 init_logger()
 
-Api = PerformanceApi
+PerformanceApi = PerformanceApi
+PerformanceApiTask = Task
+PerformanceApiLabel = Label
+
 Auth = Auth
-Task = Task
-Label = Label
